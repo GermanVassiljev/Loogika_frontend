@@ -1,13 +1,31 @@
-
-import React, { useState } from 'react';
+// App.js
+import React, { useState, useEffect } from 'react';
 import Equation from './Equation'; 
-import EquationGenerator from './EquationGenerator'; 
+import EquationGenerator from './EquationGenerator';
+import MyTree from './MyTree';  // Импорт MyTree
 import './App.css';
 
 function App() {
   const [isTest, setTest] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
-  const [equations, setEquations] = useState([]); 
+  const [equations, setEquations] = useState([]);
+  const [treeData, setTreeData] = useState({ name: 'Root', children: [] });
+
+  useEffect(() => {
+    const updatedTreeData = {
+      name: selectedValue,
+      children: equations.map(equation => ({
+        name: equation.answer.toUpperCase(),
+        children: [
+          {name: `Operator:${equation.operator}`, children: [
+            { name: `A: ${equation.operandA}` },
+          { name: `B: ${equation.operandB}` }
+          ]}
+        ]
+      }))
+    };
+    setTreeData(updatedTreeData);
+  }, [selectedValue, equations]);
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -18,8 +36,51 @@ function App() {
   }
 
   function addEquation(newEquation) {
-    setEquations([...equations, newEquation]);
-  }
+    setEquations(prevEquations => {
+        const lastEquation = prevEquations[prevEquations.length - 1];
+        if (!lastEquation || (lastEquation.children && lastEquation.children.length >= 2)) {
+            return [...prevEquations, {
+                name: newEquation.answer.toUpperCase(),
+                children: [
+                  {name: `Operatsion: ${newEquation.operator}`,
+                  children: newEquation.operator === "not" ?[
+                    { name: `A: ${newEquation.operandA}` }
+                ] : [
+                    { name: `A: ${newEquation.operandA}` },
+                    { name: `B: ${newEquation.operandB}` }
+                  ]}
+                ]
+            }];
+        } else {
+            const newChild = {
+              name: newEquation.answer.toUpperCase(),
+              children: [
+                {name: `Operatsion: ${newEquation.operator}`,
+                children: newEquation.operator === "not" ?[
+                  { name: `A: ${newEquation.operandA}` }
+              ] : [
+                  { name: `A: ${newEquation.operandA}` },
+                  { name: `B: ${newEquation.operandB}` }
+                ]}
+              ]
+          };
+            if (newEquation.operator === "not" && lastEquation.children && lastEquation.children.length === 0) {
+                lastEquation.children.push(newChild);
+            } else if (newEquation.operator !== "not" || (lastEquation.children && lastEquation.children.length < 2)) {
+                lastEquation.children.push(newChild);
+            } else {
+                return [...prevEquations, newChild];
+            }
+            return [...prevEquations];
+        }
+    });
+}
+
+function addEquation(newEquation) {
+  setEquations(prevEquations => {
+    return [...prevEquations, newEquation];
+  });
+}
 
   return (
     <div>
@@ -51,23 +112,21 @@ function App() {
       {isTest && (
         <div>
           {selectedValue !== null && (
-            
             <div>
               <EquationGenerator onGenerateEquation={addEquation} />
             </div>
           )}
-          
           <div className="equations">
-            {equations.map((equation, index) => (
-              <Equation key={index} equation={equation} />
-            ))}
-          </div>
-
-          
+          {equations.map((equation, index) => (
+        <div className="equation" key={equation.id || index}> 
+          <Equation equation={equation} />
+        </div>
+        ))}
+        </div>
+          <MyTree data={treeData} /> 
         </div>
       )}
     </div>
   );
 }
-
 export default App;

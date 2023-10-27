@@ -2,19 +2,27 @@
 import React, { useState } from 'react';
 import Equation from './Equation';
 
-function EquationGenerator() {
+function EquationGenerator({ onGenerateEquation }) {
   const [equation, setEquation] = useState('');
   const [operator, setOperator] = useState('and');
   const [operandA, setOperandA] = useState(false);
   const [operandB, setOperandB] = useState(false);
+  const answer = false;
 
   function handleGenerateClick() {
-    setEquation(<Equation operator={operator} operandA={operandA ? "true":"false"} operandB={operandB ? "true":"false"} />);
+    const newEquation = {
+      operator: operator,
+      operandA: operandA ? "true" : "false",
+      operandB: operandB ? "true" : "false",
+      answer: answer ? "true" : "false"
+    };
+    onGenerateEquation(newEquation);
   }
-
   return (
     <div className="equation-generator">
+      <div style={{border: "1pt solid black"}}>
       {equation}
+    </div>
       <h3>Создание уравнения:</h3>
       <div>
         <label>
@@ -49,5 +57,4 @@ function EquationGenerator() {
     
   );
 }
-
 export default EquationGenerator;
