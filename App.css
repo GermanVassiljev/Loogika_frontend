@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: #9DB1C9;
 }
 
 header {
-  background-color: #333;
-  color: #fff;
+  background-color: #01385E;
+  color: #CBCCCE;
   text-align: center;
   padding: 20px 0;
 }
@@ -17,7 +17,7 @@ h1 {
 }
 
 form {
-  background-color: #fff;
+  background-color: #E4C2C0;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -38,14 +38,14 @@ label {
 select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #E4C2C0;
   border-radius: 3px;
   margin-bottom: 10px;
 }
 
 input[type="submit"] {
-  background-color: #333;
-  color: #fff;
+  background-color: #01385E;
+  color: #CBCCCE;
   border: none;
   padding: 10px 15px;
   border-radius: 3px;
@@ -62,7 +62,7 @@ p {
 }
 
 .equation-generator {
-  background-color: #fff;
+  background-color: #E4C2C0;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -83,13 +83,13 @@ p {
 .equation-generator input[type="checkbox"] {
   width: 100%;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #CBCCCE;
   border-radius: 3px;
 }
 
 .equation-generator button {
-  background-color: #333;
-  color: #fff;
+  background-color: #01385E;
+  color: #CBCCCE;
   border: none;
   padding: 10px 15px;
   border-radius: 3px;
@@ -104,6 +104,6 @@ p {
 .equation {
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #01385E;
   border-radius: 5px;
 }

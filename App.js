@@ -117,6 +117,7 @@ function addEquation(newEquation) {
             </div>
           )}
           <div className="equations">
+            <label>История</label>
           {equations.map((equation, index) => (
         <div className="equation" key={equation.id || index}> 
           <Equation equation={equation} />
