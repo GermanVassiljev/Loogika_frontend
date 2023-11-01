@@ -7,10 +7,10 @@ function EquationGenerator({ onGenerateEquation }) {
   const [operator, setOperator] = useState('and');
   const [operandA, setOperandA] = useState(false);
   const [operandB, setOperandB] = useState(false);
-  const answer = false;
+  let answer = false;
 
   function handleGenerateClick() {
-    const newEquation = {
+    let newEquation = {
       operator: operator,
       operandA: operandA ? "true" : "false",
       operandB: operandB ? "true" : "false",

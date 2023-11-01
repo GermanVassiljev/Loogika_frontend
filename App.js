@@ -17,9 +17,11 @@ function App() {
       children: equations.map(equation => ({
         name: equation.answer.toUpperCase(),
         children: [
-          {name: `Operator:${equation.operator}`, children: [
+          {name: `Operator:${equation.operator}`, children: equation.operator === "not" ?[
+            { name: `A: ${equation.operandA}` }
+          ] : [
             { name: `A: ${equation.operandA}` },
-          { name: `B: ${equation.operandB}` }
+            { name: `B: ${equation.operandB}` }
           ]}
         ]
       }))
@@ -38,7 +40,9 @@ function App() {
   function addEquation(newEquation) {
     setEquations(prevEquations => {
         const lastEquation = prevEquations[prevEquations.length - 1];
-        if (!lastEquation || (lastEquation.children && lastEquation.children.length >= 2)) {
+        if (selectedValue == newEquation.answer){
+
+        } else if (!lastEquation || (lastEquation.children && lastEquation.children.length >= 2)) {
             return [...prevEquations, {
                 name: newEquation.answer.toUpperCase(),
                 children: [
@@ -51,7 +55,7 @@ function App() {
                   ]}
                 ]
             }];
-        } else {
+          } else {
             const newChild = {
               name: newEquation.answer.toUpperCase(),
               children: [

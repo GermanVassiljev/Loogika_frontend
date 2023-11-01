@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EquationGenerator from './EquationGenerator';
+import App from './App';
 
 /*function newAnswer(newEquationGenerator){
 
@@ -17,7 +18,7 @@ function Equation({ equation }) {
         .then(res => res.json())
         .then(json => {
           setLoogika(json);
-          answer = json;
+          equation.answer = json;
           //setAnswer(json); // Обновляем answer
         });
     } else if (operator === "or") {
