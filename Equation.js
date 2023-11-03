@@ -18,7 +18,7 @@ function Equation({ equation }) {
         .then(res => res.json())
         .then(json => {
           setLoogika(json);
-          equation.answer = json;
+          //equation.answer = json;
           //setAnswer(json); // Обновляем answer
         });
     } else if (operator === "or") {
@@ -41,7 +41,7 @@ function Equation({ equation }) {
   return (
     <div className="equation">
       <div className="equation-text">
-        <label>{operandA} {operator} {operandB} = </label>
+        <label>{operandA} {operator} {operandB} = {answer} / </label>
         <label>{loogika ? "true" : "false"}</label>
       </div>
     </div>
